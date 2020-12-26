@@ -52,11 +52,19 @@ def horspool_search(text, pattern):
 def is_found(position):
   return True if position != -1 else False
 
+def round_zero(nm):
+  return 0 if nm < 0 else nm
+  
+def round_top(nm, top):
+  return top if nm > top else nm
+
 def print_result(position, text, pattern):
   print((f'Found "{pattern}" at {position}' if is_found(position) else "Not Found\n"))
   if position != -1:
     ptrn_len = len(pattern)
-    print(f'...{text[position - ptrn_len - 10:position + ptrn_len + 10]}...\n')
+    begin = round_zero(position - ptrn_len - 10)
+    end = round_top(position + ptrn_len + 10, len(text))
+    print(f'... {text[begin:end]} ...\n')
 
 def demo1():
   print("[+] Horspool Algorithm Demo 1")
