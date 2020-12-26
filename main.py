@@ -38,9 +38,11 @@ def horspool_search(text, pattern):
 
   while i <= len(text) - 1:
     matches = 0
-    is_a_match = pattern[ptrn_len - 1 - matches] == text[i - matches]
-    while matches < ptrn_len and is_a_match:
-      is_a_match = pattern[ptrn_len - 1 - matches] == text[i - matches]
+
+    def is_match():
+      return pattern[ptrn_len - 1 - matches] == text[i - matches]
+
+    while matches < ptrn_len and is_match():
       matches += 1
     if matches == ptrn_len:
       return i - matches + 1
